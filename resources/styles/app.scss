@@ -1,0 +1,13 @@
+/** Import defined variables */
+@import "common/variables";
+
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/** Import global styles */
+@import "common/global";
+
+/** Import specific components */
+@import "components/buttons";
+@import "components/forms";
