@@ -6,7 +6,7 @@
  * Plugin Name:       Gamma Tileplanner
  * Plugin URI:        https://sirvelia.com/
  * Description:       Add the Tileplanner functionality.
- * Version:           2.0.0
+ * Version:           1.0.0
  * Author:            Sirvelia - Studio Moare
  * Author URI:        https://sirvelia.com/
  * License:           GPL-3.0+
@@ -20,7 +20,7 @@ if ( ! defined( 'WPINC' ) ) {
 	die('YOU SHALL NOT PASS!');
 }
 
-define( 'GAMMATILEPLANNER_VERSION', '2.0.0' );
+define( 'GAMMATILEPLANNER_VERSION', '1.0.0' );
 define( 'GAMMATILEPLANNER_PATH', plugin_dir_path( __FILE__ ) );
 define( 'GAMMATILEPLANNER_URL', plugin_dir_url( __FILE__ ) );
 

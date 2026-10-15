@@ -12,7 +12,7 @@ class Loader {
 	protected $plugin_version;
 
 	public function __construct() {
-		$this->plugin_version = defined( 'GAMMATILEPLANNER_VERSION' ) ? GAMMATILEPLANNER_VERSION : '2.0.0';
+		$this->plugin_version = defined( 'GAMMATILEPLANNER_VERSION' ) ? GAMMATILEPLANNER_VERSION : '1.0.0';
 		$this->plugin_name = 'gamma-tileplanner';
 		$this->load_dependencies();
 	}
