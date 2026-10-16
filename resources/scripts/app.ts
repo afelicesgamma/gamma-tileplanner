@@ -1,3 +1,4 @@
+import '../styles/app.css';
 import Router from './utils/Router';
 import common from './routes/common';
 

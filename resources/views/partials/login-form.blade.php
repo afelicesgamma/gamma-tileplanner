@@ -12,12 +12,12 @@
 
         <div class="mb-5">
             <label for="user_login">Usuario o email</label>
-            <input class="border-b border-primary px-2 py-1 w-full" type="text" name="user_login" id="user_login" autocomplete="username" required>
+            <input class="block w-full border-b border-primary p-2" type="text" name="user_login" id="user_login" autocomplete="username" required>
         </div>
 
         <div class="mb-5">
             <label for="login_password">Contraseña</label>
-            <input class="border-b border-primary px-2 py-1 w-full" type="password" name="user_password" id="login_password" autocomplete="current-password" required>
+            <input class="block w-full border-b border-primary p-2" type="password" name="user_password" id="login_password" autocomplete="current-password" required>
         </div>
 
         <div class="mb-5">

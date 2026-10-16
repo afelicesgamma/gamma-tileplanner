@@ -14,36 +14,27 @@
       "url": "https://www.gnu.org/licenses/gpl-3.0"
     }
   ],
-  "browserslist": [
-    "last 2 versions",
-    "android 4",
-    "opera 12"
-  ],
   "engines": {
-    "node": ">=16.0.0"
+    "node": ">=22.12.0"
   },
   "scripts": {
-    "dev": "bud dev",
-    "build": "bud build",
+    "dev": "vite build --watch",
+    "build": "vite build",
     "translate": "npm run translate:pot && npm run translate:js",
     "translate:pot": "wp i18n make-pot . ./languages/gamma-tileplanner.pot --ignore-domain --include=\"react,resources\"",
     "translate:js": "wp i18n make-json ./languages --pretty-print"
   },
   "devDependencies": {
-    "@roots/bud": "5.8.7",
-    "@roots/bud-babel": "5.8.7",
-    "@roots/bud-eslint": "5.8.7",
-    "@roots/bud-imagemin": "5.8.7",
-    "@roots/bud-postcss": "5.8.7",
-    "@roots/bud-sass": "5.8.7",
-    "@roots/bud-tailwindcss": "5.8.7",
-    "@roots/bud-typescript": "5.8.7",
-    "eslint-plugin-import": "^2.29.1"
+    "eslint": "8.57.1",
+    "eslint-plugin-import": "^2.29.1",
+    "postcss": "8.4.14",
+    "tailwindcss": "3.0.24",
+    "vite": "^7.1.12"
   },
   "dependencies": {
     "alpinejs": "^3.10.4"
   },
   "volta": {
-    "node": "16.20.2"
+    "node": "24.11.1"
   }
 }
