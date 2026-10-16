@@ -18,9 +18,6 @@ class Loader {
 	}
 
 	private function load_dependencies() {
-		\PluboRoutes\RoutesProcessor::init();
-		\PluboRoles\RolesProcessor::init();
-
 		$plugin_i18n = new Languages();
 
 		$theme_options = new ThemeOptions($this->plugin_name, $this->plugin_version);
