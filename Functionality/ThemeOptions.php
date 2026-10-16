@@ -18,7 +18,7 @@ class ThemeOptions {
 
 	public function register_fields() {
 
-		Container::make( 'theme_options', 'GammaTileplanner' )
+		Container::make( 'theme_options', 'Tileplanner' )
 		->add_fields( array(
 			Field::make( 'text', 'tileplanner_route_slug', 'Slug de la ruta para Tileplanner (vacío para usar la página de inicio)' ),
 			Field::make( 'image', 'tileplanner_logo', 'Logo del Header')

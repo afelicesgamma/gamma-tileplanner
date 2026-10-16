@@ -7,8 +7,14 @@ a los usuarios autenticados abrir el planificador y acceder a sus proyectos.
 La interfaz se sirve en una ruta configurable. Si el campo de slug se deja
 vacío, Tileplanner se muestra en la página de inicio del sitio.
 Los usuarios que no han iniciado sesión ven las opciones para acceder o
-registrarse. Los usuarios autenticados pueden abrir el planificador, consultar
-sus proyectos y abrir o eliminar proyectos existentes.
+registrarse, solicitar un enlace de recuperación y cambiar su contraseña.
+Los usuarios autenticados pueden abrir el planificador, consultar sus
+proyectos y abrir o eliminar proyectos existentes. El registro asigna el rol
+`subscriber` explícitamente.
+
+Solo los usuarios con la capacidad `manage_options` pueden acceder al backend
+de WordPress. El plugin oculta además entradas del menú y de la barra de
+administración; ocultar esas entradas no revoca permisos.
 
 ## Configuración
 
@@ -45,6 +51,7 @@ cambios. Para generar una compilación de producción manualmente, ejecuta
 El frontend se compila con Vite 8, Tailwind CSS 4 y Alpine.js. Tailwind se
 integra mediante el plugin de Vite, sin configuración de PostCSS. El lint de
 los scripts JavaScript y TypeScript se ejecuta con `npm run lint`.
+La fuente Inter se sirve desde archivos locales del plugin.
 
 Tailwind CSS 4 requiere navegadores modernos: Safari 16.4+, Chrome 111+ o
 Firefox 128+.
@@ -63,7 +70,9 @@ composer run-script zip
 El comando de Composer genera el archivo `gamma-tileplanner.zip` en el
 directorio padre. El paquete incluye `vendor/` y `dist/`, necesarios para que
 el plugin funcione, y omite las dependencias y configuraciones de desarrollo.
-El plugin carga los archivos de frontend desde `dist/manifest.json`.
+El CSS, JavaScript y las fuentes locales se generan en `dist/`; el plugin carga
+sus rutas con hash desde `dist/manifest.json` y los encola únicamente en la
+ruta de Tileplanner.
 
 ## Base del proyecto
 

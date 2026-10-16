@@ -3,6 +3,8 @@ namespace GammaTileplanner\Includes;
 
 use GammaTileplanner\Functionality\CustomFields;
 use GammaTileplanner\Functionality\AccessControl;
+use GammaTileplanner\Functionality\BackendMenu;
+use GammaTileplanner\Functionality\FrontendAssets;
 use GammaTileplanner\Functionality\LoginActions;
 use GammaTileplanner\Functionality\PasswordResetActions;
 use GammaTileplanner\Functionality\RegistrationActions;
@@ -19,7 +21,9 @@ class Loader {
 	private function load_dependencies() {
 		new ThemeOptions();
 		new Routes();
+		new FrontendAssets();
 		new AccessControl();
+		new BackendMenu();
 		new LoginActions();
 		new PasswordResetActions();
 		new RegistrationActions();
