@@ -10,8 +10,8 @@ class PostActions {
 		$this->plugin_name = $plugin_name;
 		$this->plugin_version = $plugin_version;
 		$this->add_post_actions();
-		add_action( 'admin_init', [ $this, 'redirect_subscribers_from_admin' ] );
-		add_filter( 'show_admin_bar', [ $this, 'hide_admin_bar_for_subscribers' ] );
+		add_action( 'admin_init', [ $this, 'redirect_non_admins_from_admin' ] );
+		add_filter( 'show_admin_bar', [ $this, 'hide_admin_bar_for_non_admins' ] );
 	}
 
 	private function add_post_non_logged_in_action($action, $function) {
@@ -35,12 +35,12 @@ class PostActions {
 		$this->add_post_logged_in_action( 'gamma_tileplanner_logout', 'on_user_logout' );
 	}
 
-	public function redirect_subscribers_from_admin() {
+	public function redirect_non_admins_from_admin() {
 		global $pagenow;
 
 		if (
 			! is_user_logged_in()
-			|| current_user_can( 'edit_posts' )
+			|| current_user_can( 'manage_options' )
 			|| wp_doing_ajax()
 			|| wp_doing_cron()
 			|| in_array( $pagenow, [ 'admin-post.php', 'admin-ajax.php' ], true )
@@ -52,8 +52,8 @@ class PostActions {
 		exit;
 	}
 
-	public function hide_admin_bar_for_subscribers( $show ) {
-		if ( is_user_logged_in() && ! current_user_can( 'edit_posts' ) ) {
+	public function hide_admin_bar_for_non_admins( $show ) {
+		if ( is_user_logged_in() && ! current_user_can( 'manage_options' ) ) {
 			return false;
 		}
 
