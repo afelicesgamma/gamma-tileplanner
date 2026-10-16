@@ -11,17 +11,17 @@
 
         <div class="mb-5">
             <label for="user_name">Nombre y apellidos</label>
-            <input class="border-b border-primary px-2 py-1 w-full" type="text" name="user_name" id="user_name" value="" required>
+            <input class="block w-full border-b border-primary p-2" type="text" name="user_name" id="user_name" value="" required>
         </div>
 
         <div class="mb-5">
             <label for="user_email">Email</label>
-            <input class="border-b border-primary px-2 py-1 w-full" type="email" name="user_email" id="user_email" value="" required>
+            <input class="block w-full border-b border-primary p-2" type="email" name="user_email" id="user_email" value="" required>
         </div>
 
         <div class="mb-5">
             <label for="cp">Código postal</label>
-            <input class="border-b border-primary px-2 py-1 w-full" type="text" name="cp" id="cp" value="" required>
+            <input class="block w-full border-b border-primary p-2" type="text" name="cp" id="cp" value="" required>
         </div>
 
         <div x-data="{customerType: false}">
@@ -39,7 +39,7 @@
 
             <div class="mb-5" x-show="customerType == 'profesional'">
                 <label for="profesional_type">Tipo de profesional</label>
-                <select class="bg-white border-b border-primary px-2 py-1 w-full" name="profesional_type" id="profesional_type" :required="customerType == 'profesional'">
+                <select class="block w-full bg-white border-b border-primary p-2" name="profesional_type" id="profesional_type" :required="customerType == 'profesional'">
                     <option value="">Seleccionar tipo de profesional</option>
                     <option value="decorador">Decorador</option>
                     <option value="interiorista">Interiorista</option>
@@ -51,7 +51,7 @@
 
         <div class="mb-5">
             <label for="register_password">Contraseña</label>
-            <input class="border-b border-primary px-2 py-1 w-full" type="password" name="user_password" id="register_password" value="" required>
+            <input class="block w-full border-b border-primary p-2" type="password" name="user_password" id="register_password" value="" required>
         </div>
 
         <div class="mb-5">

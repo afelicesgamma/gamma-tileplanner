@@ -12,12 +12,12 @@
 
     <div class="mb-5">
         <label for="new_password">Nueva contraseña</label>
-        <input class="border-b border-primary px-2 py-1 w-full" type="password" name="password" id="new_password" autocomplete="new-password" required>
+        <input class="block w-full border-b border-primary p-2" type="password" name="password" id="new_password" autocomplete="new-password" required>
     </div>
 
     <div class="mb-5">
         <label for="new_password_confirmation">Repite la nueva contraseña</label>
-        <input class="border-b border-primary px-2 py-1 w-full" type="password" name="password_confirmation" id="new_password_confirmation" autocomplete="new-password" required>
+        <input class="block w-full border-b border-primary p-2" type="password" name="password_confirmation" id="new_password_confirmation" autocomplete="new-password" required>
     </div>
 
     <div class="mb-5">
