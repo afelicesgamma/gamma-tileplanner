@@ -18,7 +18,7 @@
                     <p class="text-xl lg:text-2xl font-bold mb-5 text-[#3D3935]">Enlace no válido</p>
                     <p class="mb-5">El enlace ha caducado o no es válido. Solicita uno nuevo para continuar.</p>
                     <p class="mb-2">
-                        <a class="text-primary" href="{{add_query_arg( \GammaTileplanner\General\Routes::AUTH_QUERY_VAR, 'forgot', home_url( '/' . trim( $tileplanner_route, '/' ) ))}}">Solicitar otro enlace</a>
+                        <a class="text-primary" href="{{add_query_arg( \GammaTileplanner\Functionality\Routes::AUTH_QUERY_VAR, 'forgot', home_url( '/' . trim( $tileplanner_route, '/' ) ))}}">Solicitar otro enlace</a>
                     </p>
                 @endif
             @elseif ( $auth_view === 'reset_complete' )

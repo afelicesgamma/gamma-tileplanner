@@ -33,7 +33,7 @@
     </form>
 
     <p class="mb-2">
-        <a class="text-primary" href="{{add_query_arg( \GammaTileplanner\General\Routes::AUTH_QUERY_VAR, 'forgot', home_url( '/' . trim( $tileplanner_route, '/' ) ))}}">¿Has olvidado la contraseña?</a>
+        <a class="text-primary" href="{{add_query_arg( \GammaTileplanner\Functionality\Routes::AUTH_QUERY_VAR, 'forgot', home_url( '/' . trim( $tileplanner_route, '/' ) ))}}">¿Has olvidado la contraseña?</a>
     </p>
 
     <p class="mb-2">

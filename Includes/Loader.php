@@ -1,31 +1,37 @@
 <?php
 namespace GammaTileplanner\Includes;
 
-use GammaTileplanner\Admin\PostActions;
-use GammaTileplanner\General\CustomFields;
-use GammaTileplanner\General\ThemeOptions;
-use GammaTileplanner\General\Routes;
+use GammaTileplanner\Functionality\CustomFields;
+use GammaTileplanner\Functionality\AccessControl;
+use GammaTileplanner\Functionality\BackendMenu;
+use GammaTileplanner\Functionality\FrontendAssets;
+use GammaTileplanner\Functionality\LoginActions;
+use GammaTileplanner\Functionality\PasswordResetActions;
+use GammaTileplanner\Functionality\RegistrationActions;
+use GammaTileplanner\Functionality\Routes;
+use GammaTileplanner\Functionality\ThemeOptions;
 
 class Loader {
 
-	protected $plugin_name;
-	protected $plugin_version;
-
 	public function __construct() {
-		$this->plugin_version = defined( 'GAMMATILEPLANNER_VERSION' ) ? GAMMATILEPLANNER_VERSION : '1.0.0';
-		$this->plugin_name = 'gamma-tileplanner';
 		$this->load_dependencies();
+		add_action( 'plugins_loaded', [$this, 'load_plugin_textdomain'] );
 	}
 
 	private function load_dependencies() {
-		$plugin_i18n = new Languages();
-
-		$theme_options = new ThemeOptions($this->plugin_name, $this->plugin_version);
-
-		$routes = new Routes($this->plugin_name, $this->plugin_version);
-
-		$post_actions = new PostActions($this->plugin_name, $this->plugin_version);
-
-		$custom_fields = new CustomFields($this->plugin_name, $this->plugin_version);
+		new ThemeOptions();
+		new Routes();
+		new FrontendAssets();
+		new AccessControl();
+		new BackendMenu();
+		new LoginActions();
+		new PasswordResetActions();
+		new RegistrationActions();
+		new CustomFields();
 	}
+
+	public function load_plugin_textdomain() {
+		load_plugin_textdomain( GAMMATILEPLANNER_NAME, false, dirname( dirname( plugin_basename( __FILE__ ) ) ) . '/languages/' );
+	}
+
 }
