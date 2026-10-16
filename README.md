@@ -25,17 +25,45 @@ La aplicación se carga desde el servicio externo de Tileplanner de Maticad.
 ## Requisitos
 
 - WordPress.
-- PHP 7.4 o posterior.
-- Dependencias PHP instaladas mediante Composer.
-- Assets de frontend compilados en `dist/`.
+- PHP 8.2 o posterior.
+- Composer.
+- Node.js 22.12 o posterior (el proyecto fija Node.js 24.11.1 con Volta).
+- npm.
 
-Para preparar los archivos de desarrollo:
+## Desarrollo
 
 ```bash
 composer install
-npm install
-npm run build
+npm ci
+npm run dev
 ```
+
+`npm run dev` recompila los recursos de frontend en `dist/` cuando detecta
+cambios. Para generar una compilación de producción manualmente, ejecuta
+`npm run build`.
+
+El frontend se compila con Vite 8, Tailwind CSS 4 y Alpine.js. Tailwind se
+integra mediante el plugin de Vite, sin configuración de PostCSS. El lint de
+los scripts JavaScript y TypeScript se ejecuta con `npm run lint`.
+
+Tailwind CSS 4 requiere navegadores modernos: Safari 16.4+, Chrome 111+ o
+Firefox 128+.
+
+## Para preparar los archivos de producción
+
+Desde el directorio del plugin, ejecuta:
+
+```bash
+composer install --no-dev --optimize-autoloader
+npm ci
+npm run build
+composer run-script zip
+```
+
+El comando de Composer genera el archivo `gamma-tileplanner.zip` en el
+directorio padre. El paquete incluye `vendor/` y `dist/`, necesarios para que
+el plugin funcione, y omite las dependencias y configuraciones de desarrollo.
+El plugin carga los archivos de frontend desde `dist/manifest.json`.
 
 ## Base del proyecto
 
