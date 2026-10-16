@@ -2,7 +2,10 @@
 namespace GammaTileplanner\Includes;
 
 use GammaTileplanner\Functionality\CustomFields;
-use GammaTileplanner\Functionality\PostActions;
+use GammaTileplanner\Functionality\AccessControl;
+use GammaTileplanner\Functionality\LoginActions;
+use GammaTileplanner\Functionality\PasswordResetActions;
+use GammaTileplanner\Functionality\RegistrationActions;
 use GammaTileplanner\Functionality\Routes;
 use GammaTileplanner\Functionality\ThemeOptions;
 
@@ -16,7 +19,10 @@ class Loader {
 	private function load_dependencies() {
 		new ThemeOptions();
 		new Routes();
-		new PostActions();
+		new AccessControl();
+		new LoginActions();
+		new PasswordResetActions();
+		new RegistrationActions();
 		new CustomFields();
 	}
 
