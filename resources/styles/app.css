@@ -1,3 +1,11 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@source "../views";
+@source "../scripts";
+@source "../../General";
+@source "../../Admin";
+
+@theme {
+    --font-sans: Inter, sans-serif;
+    --color-primary: var(--tileplanner-primary-color);
+}
