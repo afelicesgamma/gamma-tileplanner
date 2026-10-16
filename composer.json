@@ -31,9 +31,7 @@
   "require": {
     "php": ">=8.2",
     "jenssegers/blade": "1.4.0",
-    "htmlburger/carbon-fields": "3.6.9",
-    "joanrodas/plubo-routes": "0.5.4",
-    "joanrodas/plubo-roles": "0.1.2"
+    "htmlburger/carbon-fields": "3.6.9"
   },
   "scripts": {
     "zip": [

@@ -12,15 +12,12 @@ class Loader {
 	protected $plugin_version;
 
 	public function __construct() {
-		$this->plugin_version = defined( 'GAMMATILEPLANNER_VERSION' ) ? GAMMATILEPLANNER_VERSION : '2.0.0';
+		$this->plugin_version = defined( 'GAMMATILEPLANNER_VERSION' ) ? GAMMATILEPLANNER_VERSION : '1.0.0';
 		$this->plugin_name = 'gamma-tileplanner';
 		$this->load_dependencies();
 	}
 
 	private function load_dependencies() {
-		\PluboRoutes\RoutesProcessor::init();
-		\PluboRoles\RolesProcessor::init();
-
 		$plugin_i18n = new Languages();
 
 		$theme_options = new ThemeOptions($this->plugin_name, $this->plugin_version);
