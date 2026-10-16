@@ -6,6 +6,10 @@ use GammaTileplanner\Includes\BladeLoader;
 class Routes {
 
 	const QUERY_VAR = 'gamma_tileplanner';
+	const AUTH_QUERY_VAR = 'gamma_tileplanner_auth';
+	const RESET_KEY_QUERY_VAR = 'gamma_tileplanner_key';
+	const RESET_LOGIN_QUERY_VAR = 'gamma_tileplanner_login';
+	const STATUS_QUERY_VAR = 'gamma_tileplanner_status';
 
 	protected $plugin_name;
 	protected $plugin_version;
@@ -64,6 +68,10 @@ class Routes {
 
 	public function add_query_var( $query_vars ) {
 		$query_vars[] = self::QUERY_VAR;
+		$query_vars[] = self::AUTH_QUERY_VAR;
+		$query_vars[] = self::RESET_KEY_QUERY_VAR;
+		$query_vars[] = self::RESET_LOGIN_QUERY_VAR;
+		$query_vars[] = self::STATUS_QUERY_VAR;
 
 		return $query_vars;
 	}
@@ -85,6 +93,16 @@ class Routes {
 	}
 
 	public static function render_tileplanner() {
+		$auth_view = get_query_var( self::AUTH_QUERY_VAR );
+		$reset_key = get_query_var( self::RESET_KEY_QUERY_VAR );
+		$reset_login = get_query_var( self::RESET_LOGIN_QUERY_VAR );
+		$status = get_query_var( self::STATUS_QUERY_VAR );
+		$password_reset_valid = false;
+
+		if ( $auth_view === 'reset' && is_string( $reset_key ) && is_string( $reset_login ) ) {
+			$password_reset_valid = ! is_wp_error( check_password_reset_key( $reset_key, $reset_login ) );
+		}
+
 		return BladeLoader::getInstance()->template(
 			'tileplanner',
 			[
@@ -96,8 +114,27 @@ class Routes {
 				'background_image'		=> carbon_get_theme_option( 'tileplanner_background_image' ) ?? '',
 				'logo'					=> carbon_get_theme_option( 'tileplanner_logo' ) ?? '',
 				'secret'				=> 'UdcCiRjYdGiq1xOHKWeRcoMFemO9JDGO',
+				'auth_view'				=> is_string( $auth_view ) ? $auth_view : '',
+				'password_reset_valid'	=> $password_reset_valid,
+				'password_reset_key'	=> is_string( $reset_key ) ? $reset_key : '',
+				'password_reset_login'	=> is_string( $reset_login ) ? $reset_login : '',
+				'password_reset_error'	=> $status === 'error',
+				'user_display_name'		=> wp_get_current_user()->display_name,
+				'logout_url'			=> add_query_arg(
+					[
+						'action'   => 'gamma_tileplanner_logout',
+						'_wpnonce' => wp_create_nonce( 'gamma_tileplanner_logout' ),
+					],
+					admin_url( 'admin-post.php' )
+				),
 			]
 		);
+	}
+
+	public static function get_tileplanner_url() {
+		$slug = self::get_tileplanner_route_slug();
+
+		return home_url( $slug === '/' ? '/' : '/' . $slug . '/' );
 	}
 
 }
