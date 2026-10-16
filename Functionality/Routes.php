@@ -1,5 +1,5 @@
 <?php
-namespace GammaTileplanner\General;
+namespace GammaTileplanner\Functionality;
 
 use GammaTileplanner\Includes\BladeLoader;
 
@@ -11,13 +11,7 @@ class Routes {
 	const RESET_LOGIN_QUERY_VAR = 'gamma_tileplanner_login';
 	const STATUS_QUERY_VAR = 'gamma_tileplanner_status';
 
-	protected $plugin_name;
-	protected $plugin_version;
-
-	public function __construct( $plugin_name, $plugin_version ) {
-		$this->plugin_name = $plugin_name;
-		$this->plugin_version = $plugin_version;
-
+	public function __construct() {
 		add_action( 'init', [$this, 'add_rewrite_rule'] );
 		add_filter( 'query_vars', [$this, 'add_query_var'] );
 		add_action( 'parse_request', [$this, 'match_home_route'], 9 );

@@ -15,16 +15,19 @@
  * Domain Path:       /languages
  */
 
-// Direct access, abort.
+use GammaTileplanner\Includes\Loader;
+
 if ( ! defined( 'WPINC' ) ) {
 	die('YOU SHALL NOT PASS!');
 }
 
+define( 'GAMMATILEPLANNER_NAME', 'gamma-tileplanner' );
 define( 'GAMMATILEPLANNER_VERSION', '1.0.0' );
 define( 'GAMMATILEPLANNER_PATH', plugin_dir_path( __FILE__ ) );
 define( 'GAMMATILEPLANNER_URL', plugin_dir_url( __FILE__ ) );
 
-require_once GAMMATILEPLANNER_PATH . 'vendor/autoload.php';
+if (file_exists(GAMMATILEPLANNER_PATH . 'vendor/autoload.php')) {
+	require_once GAMMATILEPLANNER_PATH . 'vendor/autoload.php';
+}
 
-//Load all plugin files.
-$loader = new GammaTileplanner\Includes\Loader();
+$loader = new Loader();

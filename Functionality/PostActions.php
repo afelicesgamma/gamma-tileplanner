@@ -1,14 +1,11 @@
 <?php
-namespace GammaTileplanner\Admin;
+namespace GammaTileplanner\Functionality;
+
+use GammaTileplanner\Functionality\Routes;
 
 class PostActions {
 
-	protected $plugin_name;
-	protected $plugin_version;
-
-	public function __construct( $plugin_name, $plugin_version ) {
-		$this->plugin_name = $plugin_name;
-		$this->plugin_version = $plugin_version;
+	public function __construct() {
 		$this->add_post_actions();
 		add_action( 'admin_init', [ $this, 'redirect_non_admins_from_admin' ] );
 		add_filter( 'show_admin_bar', [ $this, 'hide_admin_bar_for_non_admins' ] );
@@ -48,7 +45,7 @@ class PostActions {
 			return;
 		}
 
-		wp_safe_redirect( \GammaTileplanner\General\Routes::get_tileplanner_url() );
+		wp_safe_redirect( Routes::get_tileplanner_url() );
 		exit;
 	}
 
@@ -64,7 +61,7 @@ class PostActions {
 		check_admin_referer( 'gamma_tileplanner_logout' );
 
 		wp_logout();
-		wp_safe_redirect( \GammaTileplanner\General\Routes::get_tileplanner_url() );
+		wp_safe_redirect( Routes::get_tileplanner_url() );
 		exit;
 	}
 
@@ -121,7 +118,7 @@ class PostActions {
 
 	public function on_password_reset_request() {
 		if ( ! $this->verify_post_nonce( 'gamma_tileplanner_request_password_reset', 'gamma_tileplanner_request_password_reset_nonce' ) ) {
-			$this->redirect_auth_view( 'forgot', [ \GammaTileplanner\General\Routes::STATUS_QUERY_VAR => 'error' ] );
+			$this->redirect_auth_view( 'forgot', [ Routes::STATUS_QUERY_VAR => 'error' ] );
 		}
 
 		$user_login = isset( $_POST['user_login'] ) && is_string( $_POST['user_login'] )
@@ -144,11 +141,11 @@ class PostActions {
 	public function filter_password_reset_message( $message, $key, $user_login, $user_data ) {
 		$reset_url = add_query_arg(
 			[
-				\GammaTileplanner\General\Routes::AUTH_QUERY_VAR => 'reset',
-				\GammaTileplanner\General\Routes::RESET_KEY_QUERY_VAR => $key,
-				\GammaTileplanner\General\Routes::RESET_LOGIN_QUERY_VAR => $user_login,
+				Routes::AUTH_QUERY_VAR => 'reset',
+				Routes::RESET_KEY_QUERY_VAR => $key,
+				Routes::RESET_LOGIN_QUERY_VAR => $user_login,
 			],
-			\GammaTileplanner\General\Routes::get_tileplanner_url()
+			Routes::get_tileplanner_url()
 		);
 		$default_reset_url = network_site_url(
 			'wp-login.php?action=rp&key=' . rawurlencode( $key ) . '&login=' . rawurlencode( $user_login ),
@@ -188,18 +185,18 @@ class PostActions {
 			|| ! $this->verify_post_nonce( 'gamma_tileplanner_reset_password_' . $user_login, 'gamma_tileplanner_reset_password_nonce' )
 		) {
 			$this->redirect_auth_view( 'reset', [
-				\GammaTileplanner\General\Routes::RESET_KEY_QUERY_VAR => $reset_key,
-				\GammaTileplanner\General\Routes::RESET_LOGIN_QUERY_VAR => $user_login,
-				\GammaTileplanner\General\Routes::STATUS_QUERY_VAR => 'error',
+				Routes::RESET_KEY_QUERY_VAR => $reset_key,
+				Routes::RESET_LOGIN_QUERY_VAR => $user_login,
+				Routes::STATUS_QUERY_VAR => 'error',
 			] );
 		}
 
 		$user = check_password_reset_key( $reset_key, $user_login );
 		if ( is_wp_error( $user ) ) {
 			$this->redirect_auth_view( 'reset', [
-				\GammaTileplanner\General\Routes::RESET_KEY_QUERY_VAR => $reset_key,
-				\GammaTileplanner\General\Routes::RESET_LOGIN_QUERY_VAR => $user_login,
-				\GammaTileplanner\General\Routes::STATUS_QUERY_VAR => 'error',
+				Routes::RESET_KEY_QUERY_VAR => $reset_key,
+				Routes::RESET_LOGIN_QUERY_VAR => $user_login,
+				Routes::STATUS_QUERY_VAR => 'error',
 			] );
 		}
 
@@ -212,17 +209,17 @@ class PostActions {
 
 		if ( $password === '' || $password !== $password_confirmation ) {
 			$this->redirect_auth_view( 'reset', [
-				\GammaTileplanner\General\Routes::RESET_KEY_QUERY_VAR => $reset_key,
-				\GammaTileplanner\General\Routes::RESET_LOGIN_QUERY_VAR => $user_login,
-				\GammaTileplanner\General\Routes::STATUS_QUERY_VAR => 'error',
+				Routes::RESET_KEY_QUERY_VAR => $reset_key,
+				Routes::RESET_LOGIN_QUERY_VAR => $user_login,
+				Routes::STATUS_QUERY_VAR => 'error',
 			] );
 		}
 
 		$errors = apply_filters( 'validate_password_reset', new \WP_Error(), $user );
 		if ( is_wp_error( $errors ) && $errors->has_errors() ) {
 			$this->redirect_auth_view( 'reset', [
-				\GammaTileplanner\General\Routes::RESET_KEY_QUERY_VAR => $reset_key,
-				\GammaTileplanner\General\Routes::RESET_LOGIN_QUERY_VAR => $user_login,
+				Routes::RESET_KEY_QUERY_VAR => $reset_key,
+				Routes::RESET_LOGIN_QUERY_VAR => $user_login,
 				'password_reset_error' => '1',
 			] );
 		}
@@ -255,8 +252,8 @@ class PostActions {
 	}
 
 	private function redirect_auth_view( $view, $query_args = [] ) {
-		$query_args[ \GammaTileplanner\General\Routes::AUTH_QUERY_VAR ] = $view;
-		wp_safe_redirect( add_query_arg( $query_args, \GammaTileplanner\General\Routes::get_tileplanner_url() ) );
+		$query_args[ Routes::AUTH_QUERY_VAR ] = $view;
+		wp_safe_redirect( add_query_arg( $query_args, Routes::get_tileplanner_url() ) );
 		exit;
 	}
 

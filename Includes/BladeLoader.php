@@ -3,13 +3,16 @@ namespace GammaTileplanner\Includes;
 
 use Jenssegers\Blade\Blade;
 
-class BladeLoader
-{
+class BladeLoader {
+
     private static $instance = NULL;
     private $blade;
 
     private function __construct() {
-      $this->blade = new Blade(GAMMATILEPLANNER_PATH . 'resources/views', GAMMATILEPLANNER_PATH . 'resources/cache');
+      $this->blade = new Blade(
+        GAMMATILEPLANNER_PATH . 'resources/views',
+        GAMMATILEPLANNER_PATH . 'resources/cache'
+      );
     }
 
     // Clone not allowed
